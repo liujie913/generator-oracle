@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.WxpayV3TransferDetailMapper">
+  <resultMap id="BaseResultMap" type="com.pojo.WxpayV3TransferDetail">
+    <id column="ID" jdbcType="NUMERIC" property="id" />
+    <result column="OUT_BATCH_NO" jdbcType="VARCHAR" property="outBatchNo" />
+    <result column="OUT_DETAIL_NO" jdbcType="VARCHAR" property="outDetailNo" />
+    <result column="TRANSFER_AMOUNT" jdbcType="NUMERIC" property="transferAmount" />
+    <result column="TRANSFER_REMARK" jdbcType="VARCHAR" property="transferRemark" />
+    <result column="OPENID" jdbcType="VARCHAR" property="openid" />
+    <result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
+    <result column="DETAIL_ID" jdbcType="VARCHAR" property="detailId" />
+    <result column="DETAIL_STATUS" jdbcType="VARCHAR" property="detailStatus" />
+    <result column="FAIL_REASON" jdbcType="VARCHAR" property="failReason" />
+    <result column="INITIATE_TIME" jdbcType="VARCHAR" property="initiateTime" />
+    <result column="DETAIL_UPDATE_TIME" jdbcType="VARCHAR" property="detailUpdateTime" />
+    <result column="CREATED_TIME" jdbcType="TIMESTAMP" property="createdTime" />
+    <result column="UPDATED_TIME" jdbcType="TIMESTAMP" property="updatedTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, OUT_BATCH_NO, OUT_DETAIL_NO, TRANSFER_AMOUNT, TRANSFER_REMARK, OPENID, USER_NAME, 
+    DETAIL_ID, DETAIL_STATUS, FAIL_REASON, INITIATE_TIME, DETAIL_UPDATE_TIME, CREATED_TIME, 
+    UPDATED_TIME
+  </sql>
+  <select id="selectByExample" parameterType="com.pojo.WxpayV3TransferDetailExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from WXPAY_V3_TRANSFER_DETAIL
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from WXPAY_V3_TRANSFER_DETAIL
+    where ID = #{id,jdbcType=NUMERIC}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from WXPAY_V3_TRANSFER_DETAIL
+    where ID = #{id,jdbcType=NUMERIC}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pojo.WxpayV3TransferDetailExample">
+    delete from WXPAY_V3_TRANSFER_DETAIL
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pojo.WxpayV3TransferDetail">
+    insert into WXPAY_V3_TRANSFER_DETAIL (ID, OUT_BATCH_NO, OUT_DETAIL_NO, 
+      TRANSFER_AMOUNT, TRANSFER_REMARK, OPENID, 
+      USER_NAME, DETAIL_ID, DETAIL_STATUS, 
+      FAIL_REASON, INITIATE_TIME, DETAIL_UPDATE_TIME, 
+      CREATED_TIME, UPDATED_TIME)
+    values (#{id,jdbcType=NUMERIC}, #{outBatchNo,jdbcType=VARCHAR}, #{outDetailNo,jdbcType=VARCHAR}, 
+      #{transferAmount,jdbcType=NUMERIC}, #{transferRemark,jdbcType=VARCHAR}, #{openid,jdbcType=VARCHAR}, 
+      #{userName,jdbcType=VARCHAR}, #{detailId,jdbcType=VARCHAR}, #{detailStatus,jdbcType=VARCHAR}, 
+      #{failReason,jdbcType=VARCHAR}, #{initiateTime,jdbcType=VARCHAR}, #{detailUpdateTime,jdbcType=VARCHAR}, 
+      #{createdTime,jdbcType=TIMESTAMP}, #{updatedTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pojo.WxpayV3TransferDetail">
+    insert into WXPAY_V3_TRANSFER_DETAIL
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="outBatchNo != null">
+        OUT_BATCH_NO,
+      </if>
+      <if test="outDetailNo != null">
+        OUT_DETAIL_NO,
+      </if>
+      <if test="transferAmount != null">
+        TRANSFER_AMOUNT,
+      </if>
+      <if test="transferRemark != null">
+        TRANSFER_REMARK,
+      </if>
+      <if test="openid != null">
+        OPENID,
+      </if>
+      <if test="userName != null">
+        USER_NAME,
+      </if>
+      <if test="detailId != null">
+        DETAIL_ID,
+      </if>
+      <if test="detailStatus != null">
+        DETAIL_STATUS,
+      </if>
+      <if test="failReason != null">
+        FAIL_REASON,
+      </if>
+      <if test="initiateTime != null">
+        INITIATE_TIME,
+      </if>
+      <if test="detailUpdateTime != null">
+        DETAIL_UPDATE_TIME,
+      </if>
+      <if test="createdTime != null">
+        CREATED_TIME,
+      </if>
+      <if test="updatedTime != null">
+        UPDATED_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=NUMERIC},
+      </if>
+      <if test="outBatchNo != null">
+        #{outBatchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="outDetailNo != null">
+        #{outDetailNo,jdbcType=VARCHAR},
+      </if>
+      <if test="transferAmount != null">
+        #{transferAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="transferRemark != null">
+        #{transferRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="openid != null">
+        #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="detailId != null">
+        #{detailId,jdbcType=VARCHAR},
+      </if>
+      <if test="detailStatus != null">
+        #{detailStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="failReason != null">
+        #{failReason,jdbcType=VARCHAR},
+      </if>
+      <if test="initiateTime != null">
+        #{initiateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="detailUpdateTime != null">
+        #{detailUpdateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedTime != null">
+        #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pojo.WxpayV3TransferDetailExample" resultType="java.lang.Long">
+    select count(*) from WXPAY_V3_TRANSFER_DETAIL
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update WXPAY_V3_TRANSFER_DETAIL
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=NUMERIC},
+      </if>
+      <if test="record.outBatchNo != null">
+        OUT_BATCH_NO = #{record.outBatchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.outDetailNo != null">
+        OUT_DETAIL_NO = #{record.outDetailNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transferAmount != null">
+        TRANSFER_AMOUNT = #{record.transferAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="record.transferRemark != null">
+        TRANSFER_REMARK = #{record.transferRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.openid != null">
+        OPENID = #{record.openid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userName != null">
+        USER_NAME = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.detailId != null">
+        DETAIL_ID = #{record.detailId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.detailStatus != null">
+        DETAIL_STATUS = #{record.detailStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.failReason != null">
+        FAIL_REASON = #{record.failReason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.initiateTime != null">
+        INITIATE_TIME = #{record.initiateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.detailUpdateTime != null">
+        DETAIL_UPDATE_TIME = #{record.detailUpdateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdTime != null">
+        CREATED_TIME = #{record.createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatedTime != null">
+        UPDATED_TIME = #{record.updatedTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update WXPAY_V3_TRANSFER_DETAIL
+    set ID = #{record.id,jdbcType=NUMERIC},
+      OUT_BATCH_NO = #{record.outBatchNo,jdbcType=VARCHAR},
+      OUT_DETAIL_NO = #{record.outDetailNo,jdbcType=VARCHAR},
+      TRANSFER_AMOUNT = #{record.transferAmount,jdbcType=NUMERIC},
+      TRANSFER_REMARK = #{record.transferRemark,jdbcType=VARCHAR},
+      OPENID = #{record.openid,jdbcType=VARCHAR},
+      USER_NAME = #{record.userName,jdbcType=VARCHAR},
+      DETAIL_ID = #{record.detailId,jdbcType=VARCHAR},
+      DETAIL_STATUS = #{record.detailStatus,jdbcType=VARCHAR},
+      FAIL_REASON = #{record.failReason,jdbcType=VARCHAR},
+      INITIATE_TIME = #{record.initiateTime,jdbcType=VARCHAR},
+      DETAIL_UPDATE_TIME = #{record.detailUpdateTime,jdbcType=VARCHAR},
+      CREATED_TIME = #{record.createdTime,jdbcType=TIMESTAMP},
+      UPDATED_TIME = #{record.updatedTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pojo.WxpayV3TransferDetail">
+    update WXPAY_V3_TRANSFER_DETAIL
+    <set>
+      <if test="outBatchNo != null">
+        OUT_BATCH_NO = #{outBatchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="outDetailNo != null">
+        OUT_DETAIL_NO = #{outDetailNo,jdbcType=VARCHAR},
+      </if>
+      <if test="transferAmount != null">
+        TRANSFER_AMOUNT = #{transferAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="transferRemark != null">
+        TRANSFER_REMARK = #{transferRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="openid != null">
+        OPENID = #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        USER_NAME = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="detailId != null">
+        DETAIL_ID = #{detailId,jdbcType=VARCHAR},
+      </if>
+      <if test="detailStatus != null">
+        DETAIL_STATUS = #{detailStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="failReason != null">
+        FAIL_REASON = #{failReason,jdbcType=VARCHAR},
+      </if>
+      <if test="initiateTime != null">
+        INITIATE_TIME = #{initiateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="detailUpdateTime != null">
+        DETAIL_UPDATE_TIME = #{detailUpdateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedTime != null">
+        UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=NUMERIC}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pojo.WxpayV3TransferDetail">
+    update WXPAY_V3_TRANSFER_DETAIL
+    set OUT_BATCH_NO = #{outBatchNo,jdbcType=VARCHAR},
+      OUT_DETAIL_NO = #{outDetailNo,jdbcType=VARCHAR},
+      TRANSFER_AMOUNT = #{transferAmount,jdbcType=NUMERIC},
+      TRANSFER_REMARK = #{transferRemark,jdbcType=VARCHAR},
+      OPENID = #{openid,jdbcType=VARCHAR},
+      USER_NAME = #{userName,jdbcType=VARCHAR},
+      DETAIL_ID = #{detailId,jdbcType=VARCHAR},
+      DETAIL_STATUS = #{detailStatus,jdbcType=VARCHAR},
+      FAIL_REASON = #{failReason,jdbcType=VARCHAR},
+      INITIATE_TIME = #{initiateTime,jdbcType=VARCHAR},
+      DETAIL_UPDATE_TIME = #{detailUpdateTime,jdbcType=VARCHAR},
+      CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP},
+      UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=NUMERIC}
+  </update>
+</mapper>

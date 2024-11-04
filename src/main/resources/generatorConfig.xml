@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC
+        "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+    <!-- classPathEntry:数据库的 JDBC驱动的jar 包地址 -->
+    <classPathEntry location="src/main/resources/ojdbc8.jar"/>
+
+    <!--生成java代码-->
+    <context id="context" targetRuntime="MyBatis3">
+
+        <!-- 配置生成pojo的序列化的插件-->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+
+        <!-- 配置生成toString的序列化的插件  -->
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+
+        <commentGenerator>
+            <!-- 是否去除自动生成的（english）注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
+
+        <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
+                        connectionURL="jdbc:oracle:thin:@124.70.211.75:1521/liuj"
+                        userId="redsys2" password="red123" >
+            <property name="remarksReporting" value="true"></property>
+        </jdbcConnection>
+        <javaTypeResolver type="org.mybatis.generator.internal.types.JavaTypeResolverDefaultImpl">
+            <!--
+                true：使用BigDecimal对应DECIMAL和 NUMERIC数据类型
+                false：默认,
+                    scale>0;length>18：使用BigDecimal;
+                    scale=0;length[10,18]：使用Long；
+                    scale=0;length[5,9]：使用Integer；
+                    scale=0;length<5：使用Short；
+             -->
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!-- 指定生成的实体类的存放位置 -->
+        <javaModelGenerator targetPackage="com.pojo" targetProject="./src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!-- 指定生成的Dao映射文件的存放位置 -->
+        <sqlMapGenerator targetPackage="com.mapper" targetProject="./src/main/java">
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+
+        <!--指定生成的Dao接口的存放位置-->
+        <javaClientGenerator targetPackage="com.mapper" targetProject="./src/main/java" type="XMLMAPPER">
+            <property name="enableSubPackages" value="false"/>
+        </javaClientGenerator>
+
+        <!-- 指定数据库表 -->
+       <!-- <table tableName="account" domainObjectName="Account" mapperName="AccountDao"
+               enableCountByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="true" enableUpdateByExample="false"/>-->
+
+        <table schema="redsys2" tableName="WXPAY_V3_TRANSFER_DETAIL">
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+            <columnOverride column="ID" javaType="java.lang.Long" />
+            <columnOverride column="OUT_BATCH_NO" javaType="java.lang.String" />
+            <columnOverride column="OUT_DETAIL_NO" javaType="java.lang.String" />
+            <columnOverride column="TRANSFER_AMOUNT" javaType="java.math.BigDecimal" />
+            <columnOverride column="TRANSFER_REMARK" javaType="java.lang.String" />
+            <columnOverride column="OPENID" javaType="java.lang.String" />
+            <columnOverride column="USER_NAME" javaType="java.lang.String" />
+            <columnOverride column="DETAIL_ID" javaType="java.lang.String" />
+            <columnOverride column="DETAIL_STATUS" javaType="java.lang.String" />
+        </table>
+
+    </context>
+</generatorConfiguration>
